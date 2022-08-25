@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../store";
 import { authActions } from "../store/authSlice";
 
-const API = axios.create({ baseURL: 'http://localhost:5000/API/V1/', });
+const API = axios.create({ baseURL: 'https://thefindcity.herokuapp.com/API/V1/', });
 
 API.interceptors.request.use(
   (config) => {
