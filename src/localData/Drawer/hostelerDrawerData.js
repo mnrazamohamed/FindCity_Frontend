@@ -1,4 +1,4 @@
-import { AttachMoney, Logout, Person } from '@mui/icons-material';
+import { Logout, Person } from '@mui/icons-material';
 
 const data = [
   {

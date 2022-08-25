@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { Avatar, Box, Button, ButtonGroup, Typography } from '@mui/material';
+import { Avatar, Box, ButtonGroup, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUsers } from '../services/user';
 import { useState } from 'react';
@@ -64,6 +64,7 @@ const Users = () => {
 
   useEffect(() => {
     loadData()
+    // eslint-disable-next-line
   }, [forceUpdate])
 
   const columns = [

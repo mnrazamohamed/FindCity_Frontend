@@ -86,8 +86,8 @@ const OTP = () => {
         <form onSubmit={formik.handleSubmit}>
 
             {renderData.map((data, i) => {
-                if (!OTP && data.name === "OTP") return
-                if (OTP && data.name === "Email") return
+                if (!OTP && data.name === "OTP") return <></>
+                if (OTP && data.name === "Email") return <></>
                 return (
                     <Box key={i} mb={1} width={"100%"} >
                         <Typography fontWeight={700} fontSize={14} sx={{ mb: 0.3, ml: 1.5 }} >{data.name}</Typography>

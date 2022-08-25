@@ -10,6 +10,7 @@ import Confirmation from './Confirmation'
 import BoardingForm from './BoardingForm'
 import Profile from './Profile'
 import UserDetails from './UserDetails'
+import PostDetatils from './PostDetails'
 
 const index = () => {
   return (
@@ -23,8 +24,9 @@ const index = () => {
       <Receipt />
       <Confirmation />
       <BoardingForm />
-      <Profile/>
-      <UserDetails/>
+      <Profile />
+      <UserDetails />
+      <PostDetatils />
     </>
   )
 }

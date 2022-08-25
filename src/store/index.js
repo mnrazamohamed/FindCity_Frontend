@@ -6,6 +6,17 @@ import MessageSlice from "./messageSlice";
 import mapSlice from "./mapSlice";
 import forceUpdateSlice from "./forceUpdateSlice";
 
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, authSlice.reducer)
+
+
 export const store = configureStore({
 
     middleware: (getDefaultMiddleware) =>
@@ -18,7 +29,7 @@ export const store = configureStore({
 
     reducer: {
         dialog: dialogSlice.reducer,
-        auth: authSlice.reducer,
+        auth: persistedReducer,
         message: MessageSlice.reducer,
         leftDrawer: drawerSlice.reducer,
         map: mapSlice.reducer,
@@ -26,3 +37,4 @@ export const store = configureStore({
     }
 })
 
+export const persistor = persistStore(store)

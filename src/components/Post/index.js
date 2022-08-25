@@ -3,11 +3,11 @@ import React from 'react';
 import PostBtn from './PostBtn';
 import PostContent from './PostContent';
 
-const Post = ({ data: { date, life, tableValues, id, request, data } }) => {
+const Post = ({ data: { date, life, tableValues, id, request, data }, btnVisibible = true }) => {
     return (
         <Box sx={box_style}>
             <PostContent life={life} date={date} tableValues={tableValues} />
-            <PostBtn postID={id} request={request} data={data} date={date} />
+            {btnVisibible && < PostBtn postID={id} request={request} data={data} date={date} />}
         </Box >
     )
 }

@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import StripePayment from '../StripePayment';
 import ACSelect from '../core/ACSelect';
+import ACTSelect from '../core/ACTSelect';
 import TextBox from '../core/TextBox';
 import { createPayment, updatePayment, USD_LKR } from '../../services/payment';
-import { creatPost, getPost, updatePost } from '../../services/post';
+import { creatPost, updatePost } from '../../services/post';
+import { getCities } from '../../services/city';
 import { dialogActions } from '../../store/dialogSlice';
 import Checkbox from '@mui/material/Checkbox';
 import { forceUpdateAction } from '../../store/forceUpdateSlice';
@@ -49,6 +51,8 @@ const Post = ({ data: postData }) => {
     const [msg, setMsg] = useState({ variant: "", msg: "" })
     const [submit, setSumbit] = useState(false)
     const [sendData, setSendData] = useState(false)
+    const [RM_Cities, setRM_Cities] = useState(undefined)
+    const [HT_Cities, setHT_Cities] = useState(undefined)
 
     const paymentOnClick = async (token) => {
 
@@ -61,6 +65,7 @@ const Post = ({ data: postData }) => {
         setMsg({ variant: "#0a45a3", msg: "Payment request has been sent" })
 
         // step 1 : create payment
+        // eslint-disable-next-line
         var { data, status } = await createPayment(sendData)
         if (status !== 201) {
             setMsg({ variant: "red", msg: "Error occured on creating payment" })
@@ -71,6 +76,7 @@ const Post = ({ data: postData }) => {
 
         setMsg({ variant: "#0a45a3", msg: "Post creation request has been sent" })
         // step 2 : create post
+        // eslint-disable-next-line
         var { data, status } = await creatPost(sendData)
         if (status !== 201) {
             setMsg({ variant: "red", msg: "Error occuredon creating post. Your payment will be refund" })
@@ -79,6 +85,7 @@ const Post = ({ data: postData }) => {
         sendData.postID = data._id
 
         // step 3 : provide post id to created payment record
+        // eslint-disable-next-line
         var { data, status } = await updatePayment(sendData)
         if (status !== 200) {
             setMsg({ variant: "red", msg: "Error occured" })
@@ -100,12 +107,13 @@ const Post = ({ data: postData }) => {
             priceRange: inputData.priceRange,
             roomLocation: inputData.roomLocation,
             roomType: inputData.roomType,
+            approval: false,
         }
 
         if (postData) {
             const { data, status } = await updatePost(auth.userID, postData._id, temp)
-            console.log(data);
             if (status !== 200) {
+                console.log(data);
                 setMsg({ variant: "red", msg: data })
                 return
             }
@@ -121,8 +129,8 @@ const Post = ({ data: postData }) => {
 
     const renderData = [
         { name: "Full Name", value: "name", placeholder: "Full Name", options: { defaultValue: postData?.name, } },
-        { name: "Home Town", value: "from", placeholder: "Home Town", options: { defaultValue: postData?.from, } },
-        { name: "Room Location", value: "roomLocation", placeholder: "Room Location", options: { defaultValue: postData?.roomLocation, } },
+        // { name: "Home Town", value: "from", placeholder: "Home Town", options: { defaultValue: postData?.from, } },
+        // { name: "Room Location", value: "roomLocation", placeholder: "Room Location", options: { defaultValue: postData?.roomLocation, } },
     ]
 
     const renderGender = {
@@ -164,7 +172,30 @@ const Post = ({ data: postData }) => {
         validationSchema: Schema,
     })
 
+    const loadCitites = async () => {
+        const { data: { city } } = await getCities()
+        setRM_Cities(
+            {
+                name: "Room Location",
+                value: "roomLocation",
+                defaultValue: postData?.roomLocation,
+                list: city.map(c => { return { name: c.name, value: c.name } })
+            }
+        )
+        setHT_Cities(
+            {
+                name: "Home Town",
+                value: "from",
+                defaultValue: postData?.from,
+                list: city.map(c => { return { name: c.name, value: c.name } })
+            }
+        )
+    }
+
     useEffect(() => {
+
+        loadCitites()
+
         if (postData) {
             formik.values.from = postData.from
             formik.values.roomLocation = postData.roomLocation
@@ -173,6 +204,7 @@ const Post = ({ data: postData }) => {
             formik.values.roomType = postData.roomType
             formik.values.priceRange = postData.priceRange
         }
+        // eslint-disable-next-line
     }, [postData])
 
     return (
@@ -189,6 +221,9 @@ const Post = ({ data: postData }) => {
                         </Box>
                     )
                 })}
+
+                <ACTSelect data={HT_Cities} formik={formik} />
+                <ACTSelect data={RM_Cities} formik={formik} />
 
                 <ACSelect data={renderGender} formik={formik} />
                 <ACSelect data={renderRoomType} formik={formik} />

@@ -18,6 +18,15 @@ export const getBoarding_userID = async (userID) => {
     }
 };
 
+export const getBoardings = async (query) => {
+    try {
+        const response = await API.get(`/boarding/?${query}`);
+        return response.data;
+    } catch (e) {
+        throw e;
+    }
+};
+
 export const createBoarding = async (data) => {
     try {
         const response = await API.post(`/boarding`, data);

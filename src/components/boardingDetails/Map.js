@@ -1,14 +1,13 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { GoogleMap, useLoadScript, Marker, Circle } from '@react-google-maps/api'
 import { useDispatch } from 'react-redux'
 import { mapActions } from '../../store/mapSlice'
 import { Box, Typography } from '@mui/material'
 
-const Map = ({ drag = false, mt = 3, lat, lng, circle = false }) => {
+const Map = ({ drag = false, mt = 3, lat, lng, circle = false, marker = true, mapRange = 300, sx }) => {
   const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyCbmSTEGlD-KFPipBrAys-xEmGRsmHvlZ8" })
   const dispatch = useDispatch()
-
-  const MarkerPosition = useMemo(() => ({ lat: lat ?? 9.661508120592226, lng: lng ?? 80.02554547964867 }), [])
+  const MarkerPosition = useMemo(() => ({ lat: lat ?? 9.661508120592226, lng: lng ?? 80.02554547964867 }), [lat, lng])
 
   const handleMarkerDragEnd = e => {
     dispatch(mapActions.set({ lat: e.latLng.lat(), lng: e.latLng.lng() }))
@@ -34,8 +33,9 @@ const Map = ({ drag = false, mt = 3, lat, lng, circle = false }) => {
       width={400}
       height={300}
       borderRadius={3.5}
-      sx={{ borderColor: "#B4B4B4", borderStyle: "solid", borderWidth: 0.5 }}
-      boxShadow={10}>
+      boxShadow={10}
+      sx={{ borderColor: "#B4B4B4", borderStyle: "solid", borderWidth: 0.5, ...sx }}
+    >
       <GoogleMap
         zoom={15}
         center={MarkerPosition}
@@ -43,17 +43,22 @@ const Map = ({ drag = false, mt = 3, lat, lng, circle = false }) => {
           width: 400,
           height: 300,
           borderRadius: 16,
+          ...sx,
         }}>
-        <Marker
-          position={MarkerPosition}
-          draggable={drag}
-          onDragEnd={handleMarkerDragEnd}
-          onDblClick={e => window.open(`https://www.google.com/maps/search/?api=1&query=${e.latLng.lat()},${e.latLng.lng()}`, '_blank', 'location=yes,height=900,width=1600,scrollbars=yes,status=yes')}
-        />
+        {marker && (
+          <Marker
+            position={MarkerPosition}
+            draggable={drag}
+            onDragEnd={handleMarkerDragEnd}
+            onDblClick={e => window.open(`https://www.google.com/maps/search/?api=1&query=${e.latLng.lat()},${e.latLng.lng()}`, '_blank', 'location=yes,height=900,width=1600,scrollbars=yes,status=yes')}
+          />
+        )}
         {circle && (
           <Circle
             center={MarkerPosition}
-            radius={300}
+            radius={mapRange}
+            onDragEnd={handleMarkerDragEnd}
+            draggable={drag}
             options={
               { "strokeColor": "#ff0000" }
             }

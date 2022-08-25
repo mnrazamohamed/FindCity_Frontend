@@ -70,7 +70,8 @@ const BoardingForm = ({ boardingData }) => {
       data.geoLocation.forEach(data => formData.append("geoLocation", data))
       formData.append("available", data.available)
       formData.append("facilities", data.facilities)
-
+      
+      formData.append("approval", false)
       formData.append("imageFolder", "boarding")
       formData.append("userID", auth.userID)
 
@@ -79,9 +80,9 @@ const BoardingForm = ({ boardingData }) => {
         setMsg({ variant: "#0a45a3", msg: "Boarding update request has been send. Please wait..." })
         formData.append("boardingID", boardingData._id)
         setMsg({ variant: "#0a45a3", msg: "Boarding update request has been send" })
-        const { data: error, status } = await updateBoarding(boardingData._id, formData)
+        const { data, status } = await updateBoarding(boardingData._id, formData)
         if (status !== 200) {
-          console.log(error);
+          console.log(data);
           setMsg({ variant: "red", msg: "Error on updation. try again" })
         }
         setMsg({ variant: "green", msg: "Boarding updated successfully" })
@@ -90,9 +91,9 @@ const BoardingForm = ({ boardingData }) => {
       //create boarding
       if (!boardingData) {
         setMsg({ variant: "#0a45a3", msg: "Boarding create request has been send. Please wait..." })
-        const { data: error, status } = await createBoarding(formData)
+        const { data, status } = await createBoarding(formData)
         if (status !== 201) {
-          console.log(error);
+          console.log(data);
           setMsg({ variant: "red", msg: "Error on registration. try again" })
           return
         }
@@ -258,7 +259,7 @@ const BoardingForm = ({ boardingData }) => {
         {renderImages.map((image, i) => {
           return (
             <Button key={i} variant="text" component="label" size="small" sx={{ p: 0 }} >
-              <Box component="img" src={images[image.name]} alt={image.alt} width={4*40} height={3*40} sx={{ objectFit: "cover" }} border={Boolean(formik.errors[image.name]) && "1px solid red"} borderRadius={2} />
+              <Box component="img" src={images[image.name]} alt={image.alt} width={4 * 40} height={3 * 40} sx={{ objectFit: "cover" }} border={Boolean(formik.errors[image.name]) && "1px solid red"} borderRadius={2} />
               <input hidden accept="image/*" multiple type="file" name={image.name} onChange={onImageChange} />
             </Button>
           )

@@ -57,6 +57,7 @@ function Views() {
                 <Route path="mypost" element={<Post />} />
                 <Route path="mypost/:postID/request" element={<Request />} />
                 <Route path="boarding" element={<Boarding />} />
+                <Route path="boarding/:boardingID" element={<MyBoarding />} />
                 {/* left drawer tabs */}
                 <Route path="profile" element={<Profile />} />
                 <Route path="request" element={<Request />} />
@@ -73,6 +74,7 @@ function Views() {
                 {/* header tabs */}
                 <Route path="home" element={<Post />} />
                 <Route path="boarding" element={<Boarding />} />
+                <Route path="boarding/:boardingID" element={<MyBoarding />} />
                 {/* left drawer tabs */}
                 <Route path="profile" element={<Profile />} />
                 <Route path="users" element={<Users />} />

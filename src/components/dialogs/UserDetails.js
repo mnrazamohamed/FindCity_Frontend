@@ -1,8 +1,8 @@
-import { Box, Dialog, DialogTitle } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import UserProfile from '../../pages/Profile';
 import { dialogActions } from '../../store/dialogSlice';
-import UserProfile from '../../pages/Profile'
 
 const UserDetails = () => {
     const dispatch = useDispatch()

@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import BoardingDetailsComp from '../components/boardingDetails';
 import BtnPrimary from '../components/core/BtnPrimary';
 import { deleteBoarding, getBoarding_boardingID, getBoarding_userID } from '../services/boarding';
@@ -15,11 +16,13 @@ const MyBoarding = ({ boardingID = undefined }) => {
   const [loading, SetLoading] = useState(true)
   const dispatch = useDispatch()
   const forceUpdate = useSelector(state => state.forceUpdate.boarding)
+  const { boardingID: params_BID } = useParams()
 
   const loadData = async () => {
     SetLoading(true)
-    if (boardingID) {
-      var { data: { boarding }, status: boardingStatus } = await getBoarding_boardingID(boardingID)
+    if (boardingID || params_BID) {
+      const bid = boardingID ?? params_BID
+      var { data: { boarding }, status: boardingStatus } = await getBoarding_boardingID(bid)
       var { data: { user } } = await getUser(boarding.userID)
     } else {
       // eslint-disable-next-line

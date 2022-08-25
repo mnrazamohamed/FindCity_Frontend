@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, Link } from "@mui/material";
+import { Box, Paper, Typography, Link, Autocomplete, TextField, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../services/post";
 import PostComp from "./../components/Post";
@@ -6,7 +6,6 @@ import BtnText from "../components/core/btnText"
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dialogActions } from "../store/dialogSlice";
-import defaultImage from "../localData/image/default_image.jpg"
 import ad01 from "../localData/image/ad01.jpeg"
 import ad02 from "../localData/image/ad02.jpg"
 import ad03 from "../localData/image/ad03.jpg"
@@ -15,6 +14,7 @@ import ad05 from "../localData/image/ad05.jpg"
 import srvc01 from "../localData/image/srvc01.png"
 import srvc02 from "../localData/image/srvc02.png"
 import srvc03 from "../localData/image/srvc03.png"
+import CloseIcon from '@mui/icons-material/Close';
 
 const formatAMPM = date => {
   let hours = date.getHours();
@@ -35,9 +35,17 @@ const Post = () => {
   const location = useLocation()
   const auth = useSelector(state => state.auth)
   const update = useSelector(state => state.forceUpdate.post)
+  const [cities, setCities] = useState(undefined)
 
 
-  const loadData = async () => {
+  const handleCityFilter = (e, v) => {
+    if (!v)
+      loadData()
+    else
+      loadData(v)
+  }
+
+  const loadData = async (roomLocation) => {
 
     setPosts(undefined)
     setLoading(true)
@@ -45,14 +53,25 @@ const Post = () => {
     currentPage = currentPage[currentPage.length - 1]
 
     if (currentPage.toLowerCase() === "mypost") {
-      var { data: { post }, status } = await getPosts(auth.userID)
+
+      // eslint-disable-next-line
+      if (roomLocation)
+        var { data: { post }, status } = await getPosts(auth.userID, `roomLocation=${roomLocation}`)
+      else
+        var { data: { post }, status } = await getPosts(auth.userID)
+      console.log(roomLocation);
     }
-    else// eslint-disable-next-line
-      var { data: { post }, status } = await getPosts()
+    else
+      if (roomLocation)
+        var { data: { post }, status } = await getPosts(undefined, `roomLocation=${roomLocation}`)
+      else
+        var { data: { post }, status } = await getPosts()
 
 
     if (status === 200) {
-      post = post.filter(post => post.life !== 0)
+
+      post = post.filter(post => post.life !== 0 && post.approval)
+      if (!roomLocation) setCities(new Array(...new Set(post.map(p => p.roomLocation))))
       post = post.map(post => {
         const date = new Date(post.createdAt)
         return {
@@ -124,11 +143,33 @@ const Post = () => {
 
         {(post instanceof Array) && (
           <Box >
-            {auth.role === "hosteler" && (
-              <Box display="flex" justifyContent="end">
-                <BtnText name="Create Post" type="button" onClick={handleCreatePostClick} sx={btnCreatePost_style} />
-              </Box>
-            )}
+            <Box display="flex" justifyContent="space-between">
+              {cities && (
+                <Autocomplete
+                  size='small'
+                  options={cities}
+                  onChange={handleCityFilter}
+                  getOptionLabel={option => option}
+                  PaperComponent={params => <Paper {...params} sx={{ ...paperStyle }} />}
+                  sx={{ width: 250, ".MuiOutlinedInput-root": { bgcolor: "white", borderRadius: "100px !important" } }}
+                  renderInput={(params) => (
+                    <Box display="flex" alignItems="center">
+                      < TextField
+                        {...params}
+                        placeholder={"Cities"}
+                      />
+                      <IconButton sx={{ ml: 1 }} onClick={() => loadData()}><CloseIcon /></IconButton>
+                    </Box>
+                  )}
+                />
+              )}
+              {auth.role === "hosteler" && (
+                <Box display="flex" justifyContent="end">
+                  <BtnText name="Create Post" type="button" onClick={handleCreatePostClick} sx={btnCreatePost_style} />
+                </Box>
+              )}
+            </Box>
+
             < Box display="flex" flexDirection="column" >
               {post.map(data => <PostComp key={data.id} data={data} />)}
             </Box>
@@ -170,11 +211,21 @@ const paper_style = {
   bgcolor: "#eee",
   position: "fixed",
   p: 3,
-  pt:0,
+  pt: 0,
   overflowY: "scroll",
   maxHeight: "85vh",
   width: 400,
   '&::-webkit-scrollbar': {
     width: 0,
+  },
+}
+
+const paperStyle = {
+  bgcolor: "background.mainbg",
+  borderRadius: 0.3,
+  mt: 0.5,
+  "li": {
+    color: "white",
+    px: 2
   },
 }

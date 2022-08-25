@@ -1,8 +1,8 @@
 import API from "./api";
 
-export const getPosts = async (userID = "") => {
+export const getPosts = async (userID = "", query = "") => {
   try {
-    const response = await API.get(`/post/${userID}`);
+    const response = await API.get(`/post/${userID}?${query}`);
     return response.data;
   } catch (e) {
     throw e;

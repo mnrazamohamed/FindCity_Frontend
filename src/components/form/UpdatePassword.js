@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { dialogActions } from '../../store/dialogSlice';
-import { messageActions } from '../../store/messageSlice';
 import BtnSecondary from '../core/BtnSecondary';
 import TextBox from '../core/TextBox';
 import { updatePassword_FP } from '../../services/user';

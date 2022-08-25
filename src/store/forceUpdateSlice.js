@@ -6,6 +6,7 @@ const initialState = {
     user: undefined,
     boarding: undefined,
     users: undefined,
+    verification: undefined,
 }
 
 const forceUpdateSlice = createSlice({

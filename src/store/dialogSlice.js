@@ -14,6 +14,7 @@ const generateInitStates = () => {
         "boardingForm",
         "profile",
         "userDetails",
+        "postDetatils",
     ]
         .reduce((prev, cur) => ({ ...prev, [cur]: { status: false, data: "", onSubmit: "" } }), {})
 }

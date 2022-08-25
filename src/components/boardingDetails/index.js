@@ -1,11 +1,10 @@
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
 import React from 'react';
-import ImageSlider from './ImageSlider';
-import Table from '../core/Table';
-import Map from './Map';
 import Chips from '../Chips';
+import Table from '../core/Table';
+import ImageSlider from './ImageSlider';
+import Map from './Map';
 
 const BoardingDetails = ({ data }) => {
     return (

@@ -41,7 +41,7 @@ const PostBtn = ({ postID, request, date, data }) => {
             dispatch(messageActions.show({ msg: "Notify request has been added successfully" }))
             return
         }
-        dispatch(messageActions.show({ msg: "You not own a boarding yet. Create a boarding to notify a post", variant: "info" }))
+        dispatch(messageActions.show({ msg: "You didn't own a boarding yet. Create a boarding to notify a post", variant: "info" }))
         dispatch(dialogActions.show({ name: "boardingForm" }))
 
     }

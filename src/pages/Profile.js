@@ -2,7 +2,7 @@ import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Avatar, Box, Button, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -34,13 +34,15 @@ const Profile = ({ userDefault }) => {
           nic: user.nic,
         })
       })()
-  }, [auth.userID, forceUpdate])
+  }, [auth.userID, forceUpdate, userDefault])
 
 
   const onDelete = async () => {
     const response = await deleteUser(auth.userID)
-    if (response.status !== 200)
-      dispatch(messageActions.show({ msg: "Error on user delettion", variant: "error" }))
+    if (response.status !== 200) {
+      console.log(response);
+      dispatch(messageActions.show({ msg: "Error on user deletion", variant: "error" }))
+    }
     else {
       dispatch(messageActions.show({ msg: "account deleted successfully" }))
       dispatch(dialogActions.hide('delete'))
