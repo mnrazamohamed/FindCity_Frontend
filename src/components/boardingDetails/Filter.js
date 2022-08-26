@@ -1,4 +1,4 @@
-import { Autocomplete, Box, IconButton, Paper, Switch, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, IconButton, Paper, Switch, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import { getBoardings } from '../../services/boarding'
@@ -6,6 +6,7 @@ import Map from './Map'
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector } from 'react-redux'
 import { haversine_distance } from './GeoDecoder'
+import { useRef } from 'react'
 
 const genderList = {
     name: "Gender",
@@ -34,6 +35,7 @@ const TypeList = {
         { name: "All Types", key: "roomType", value: undefined },
         { name: "Single", key: "roomType", value: "single" },
         { name: "Share", key: "roomType", value: "share" },
+        { name: "Share/Share", key: "roomType", value: "single/share" },
     ]
 }
 
@@ -63,7 +65,7 @@ const Filter = ({ setBoardings }) => {
         boarding.forEach(b => {
             const d = haversine_distance({ lat: b.geoLocation[1], lng: b.geoLocation[0] }, map)
             const diff = Math.abs(Number.parseFloat(mapRange) - Number.parseFloat(d))
-            console.log(diff);
+            if (diff <= mapRange)
                 filtered.push(b)
         })
         setBoardings(filtered)
@@ -98,28 +100,7 @@ const Filter = ({ setBoardings }) => {
 
     return (
         <Box width={300} bgcolor="#eee" height="80vh" borderRadius={5} mr={5} border="1px solid #b4b4b4">
-            <Typography fontSize={22} textAlign="center" fontWeight={700} sx={{ mt: 4, mb: 2 }}>Filter</Typography>
-            {list.map((data, i) => (
-                <Autocomplete
-                    key={i}
-                    size='small'
-                    options={data.list}
-                    onChange={handleACChange}
-                    disableClearable={true}
-                    getOptionLabel={option => option.name}
-                    PaperComponent={params => <Paper {...params} sx={{ ...paperStyle }} />}
-                    sx={autocompleteStyle}
-                    renderInput={(params) => (
-                        < TextField
-                            {...params}
-                            name={data.value}
-                            placeholder={data.name}
-                            inputProps={{ ...params.inputProps, readOnly: true }}
-                            sx={{ minWidth: 200, }}
-                        />
-                    )}
-                />
-            ))}
+            <Typography fontSize={22} textAlign="center" fontWeight={700} sx={{ mt: 4, mb: mapFilter ? 0 : 2 }}>Filter</Typography>
 
             {mapFilter ? (
                 <Box display="flex" flexDirection="column" justifyContent="center" mx={1}>
@@ -129,19 +110,51 @@ const Filter = ({ setBoardings }) => {
                         <TextField
                             variant="outlined"
                             size='small'
+                            InputProps={{ inputProps: { min: 0 } }}
                             type="number"
                             disabled={!mapFilter}
                             onChange={e => setMapRange(e.target.value)}
-                            placeholder="Range in Meters"
+                            placeholder="Range (m)"
                             name="mapRange"
                             sx={style_txtbox}
                         />
-                        <IconButton onClick={handleMap}><SearchIcon /></IconButton>
+                        <Button
+                            variant='contained'
+                            size="small"
+                            sx={{ width: 200 }}
+                            onClick={handleMap}
+                        >
+                            Search
+                            <SearchIcon fontSize='small' sx={{ ml: 0.5 }} />
+                        </Button>
                     </Box>
                 </Box>) : (
-                <Box display="flex" alignItems="center" mx={2}>
-                    <Typography fontSize={16} fontWeight={500}>Map search </Typography>
-                    <Switch onChange={(e, v) => setMapFilter(v)} checked={mapFilter} />
+                <Box display="flex" mx={2} flexDirection="column">
+                    {list.map((data, i) => (
+                        <Autocomplete
+                            key={i}
+                            size='small'
+                            options={data.list}
+                            onChange={handleACChange}
+                            disableClearable={true}
+                            getOptionLabel={option => option.name}
+                            PaperComponent={params => <Paper {...params} sx={{ ...paperStyle }} />}
+                            sx={autocompleteStyle}
+                            renderInput={(params) => (
+                                < TextField
+                                    {...params}
+                                    name={data.value}
+                                    placeholder={data.name}
+                                    inputProps={{ ...params.inputProps, readOnly: true }}
+                                    sx={{ minWidth: 200, }}
+                                />
+                            )}
+                        />
+                    ))}
+                    <Box display="flex" alignItems="center" mx={2} >
+                        <Typography fontSize={16} fontWeight={500}>Map search </Typography>
+                        <Switch onChange={(e, v) => setMapFilter(v)} checked={mapFilter} />
+                    </Box>
                 </Box>
             )}
 
@@ -180,6 +193,6 @@ const style_txtbox = {
     p: 1,
     ".MuiOutlinedInput-root": {
         bgcolor: "white",
-        borderRadius: 10
+        borderRadius: 0.4
     }
 }
