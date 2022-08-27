@@ -138,8 +138,8 @@ const Post = ({ data: postData }) => {
         value: "gender",
         defaultValue: postData?.gender,
         list: [
-            { name: "Male", value: "male" },
-            { name: "Female", value: "female" }
+            { name: "Male", value: "Male" },
+            { name: "Female", value: "Female" }
         ]
     }
 
@@ -148,9 +148,9 @@ const Post = ({ data: postData }) => {
         value: "roomType",
         defaultValue: postData?.roomType,
         list: [
-            { name: "Single/Share", value: "single/share" },
-            { name: "Single", value: "single" },
-            { name: "Share", value: "share" }
+            { name: "Single/Share", value: "Single/Share" },
+            { name: "Single", value: "Single" },
+            { name: "Share", value: "Share" }
         ]
     }
 
