@@ -189,8 +189,8 @@ const BoardingForm = ({ boardingData }) => {
     value: "gender",
     defaultValue: boardingData?.gender,
     list: [
-      { name: "Male", value: "male" },
-      { name: "Female", value: "female" }
+      { name: "Male", value: "Male" },
+      { name: "Female", value: "Female" }
     ]
   }
 
@@ -199,11 +199,11 @@ const BoardingForm = ({ boardingData }) => {
     value: "facilities",
     defaultValue: boardingData?.facilities,
     list: [
-      { name: "Table", value: "table" },
-      { name: "Chair", value: "chair" },
-      { name: "Bed", value: "bed" },
-      { name: "Fan", value: "fan" },
-      { name: "Mattress", value: "mattress" },
+      { name: "Table", value: "Table" },
+      { name: "Chair", value: "Chair" },
+      { name: "Bed", value: "Bed" },
+      { name: "Fan", value: "Fan" },
+      { name: "Mattress", value: "Mattress" },
     ]
   }
 
@@ -212,9 +212,9 @@ const BoardingForm = ({ boardingData }) => {
     value: "roomType",
     defaultValue: boardingData?.roomType,
     list: [
-      { name: "Single", value: "single" },
-      { name: "Share", value: "share" },
-      { name: "Single/share", value: "single/share" },
+      { name: "Single", value: "Single" },
+      { name: "Share", value: "Share" },
+      { name: "Single/share", value: "Single/Share" },
     ]
   }
 
