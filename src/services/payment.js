@@ -2,7 +2,7 @@ import API from "./api";
 
 export const USD_LKR = async (amount) => {
     try {
-      const response = await API.get(`https://api.fastforex.io/convert?from=USD&to=LKR&api_key=d202e96799-00f52fb750-rh3v4l&amount=${amount}`); 
+      const response = await API.get(`https://api.fastforex.io/convert?from=USD&to=LKR&api_key=e6c13c7cad-2da0b60cfe-rho0jf&amount=${amount}`); 
         return response.data.result.LKR;
     } catch (e) {
         throw e;
