@@ -3,6 +3,7 @@ import React from 'react'
 import BtnText from '../components/core/btnText'
 import LoginForm from '../components/form/Login'
 import logo from '../localData/image/findcitylogo.png'
+import LoginPic from '../localData/image/Login.jpg'
 import { dialogActions } from '../store/dialogSlice';
 import { useDispatch } from 'react-redux'
 
@@ -19,7 +20,7 @@ const Login = () => {
             <Box display="flex" p={0} m={0}>
 
                 {/* left image */}
-                <Box component="img" src={"https://lp-cms-production.imgix.net/2021-05/Jaffna_Fort_Sri_Lanka.jpg?auto=format&q=40&ar=16%3A9&fit=crop&crop=center&fm=auto&w=1946"} alt='login Image' width="75%" height="100vh" />
+                <Box component="img" src={LoginPic} alt='login Image' width="75%" height="100vh" />
 
                 {/* right box */}
                 <Box width="25%" display="flex" flexDirection="column" alignItems="center" >
