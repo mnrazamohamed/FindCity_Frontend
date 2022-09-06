@@ -13,8 +13,8 @@ const genderList = {
     value: "gender",
     list: [
         { name: "All Genders", key: "gender", value: undefined },
-        { name: "Male", key: "gender", value: "male" },
-        { name: "Female", key: "gender", value: "female" },
+        { name: "Male", key: "gender", value: "Male" },
+        { name: "Female", key: "gender", value: "Female" },
     ]
 }
 
@@ -33,9 +33,9 @@ const TypeList = {
     value: "roomType",
     list: [
         { name: "All Types", key: "roomType", value: undefined },
-        { name: "Single", key: "roomType", value: "single" },
-        { name: "Share", key: "roomType", value: "share" },
-        { name: "Share/Share", key: "roomType", value: "single/share" },
+        { name: "Single", key: "roomType", value: "Single" },
+        { name: "Share", key: "roomType", value: "Share" },
+        { name: "Share/Share", key: "roomType", value: "Single/Share" },
     ]
 }
 
