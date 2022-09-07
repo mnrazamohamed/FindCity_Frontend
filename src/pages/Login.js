@@ -13,7 +13,7 @@ const Login = () => {
 
     const OnClick_CreateAccount = () => dispatch(dialogActions.show({ name: "signup" }))
     const onClick_forgetPassword = () => dispatch(dialogActions.show({ name: "OTP" }))
-    
+
 
     return (
         <>
@@ -31,17 +31,25 @@ const Login = () => {
 
                     <Box display="flex" justifyContent="center" alignItems="center">
                         <Typography color="text.main" fontWeight={400} sx={{ mr: 0.2 }}>Not registered yet?</Typography>
-                        <BtnText name="Create an Account" onClick={OnClick_CreateAccount} />
+                        <BtnText sx={{ ...style_link, fontWeight: '1000', fontSize: 14 }} name="Create an Account" onClick={OnClick_CreateAccount} />
                     </Box>
 
                     <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
-                        <BtnText name="Forgot password?" onClick={onClick_forgetPassword} />
+                        <BtnText sx={{ ...style_link, fontWeight: '1000', fontSize: 14 }} name="Forgot password?" onClick={onClick_forgetPassword} />
                     </Box>
                 </Box>
 
             </Box>
         </>
     )
+}
+
+const style_link = {
+    "&:hover": {
+        backgroundColor: 'white',
+    },
+
+
 }
 
 export default Login
