@@ -46,10 +46,8 @@ const Login = () => {
 
 const style_link = {
     "&:hover": {
-        backgroundColor: 'white',
+        backgroundColor: '#f8f8f8',
     },
-
-
 }
 
 export default Login
