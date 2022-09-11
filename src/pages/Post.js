@@ -110,13 +110,13 @@ const Post = () => {
       <Box display="flex" justifyContent="space-evenly" width="100%" mt={3} >
 
         {/* Services */}
-        <Box width={400} p={1} >
+        <Box width={150} p={1} >
           <Paper sx={paper_style} >
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={2}>
               <Typography variant="h6" fontWeight={500} mb={1.5} color="initial">Services</Typography>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc01} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc02} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc03} width={300} borderRadius={3} mb={3} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc01} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc02} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc03} width={200} borderRadius={1} mb={0.2} /> </Link>
             </Box>
           </Paper>
         </Box>
@@ -151,7 +151,7 @@ const Post = () => {
                   onChange={handleCityFilter}
                   getOptionLabel={option => option}
                   PaperComponent={params => <Paper {...params} sx={{ ...paperStyle }} />}
-                  sx={{ width: 250, ".MuiOutlinedInput-root": { bgcolor: "white", borderRadius: "100px !important" } }}
+                  sx={{ width: 250, ".MuiOutlinedInput-root": { bgcolor: "white", borderRadius: "4px !important" } }}
                   renderInput={(params) => (
                     <Box display="flex" alignItems="center">
                       < TextField
@@ -177,15 +177,15 @@ const Post = () => {
         )}
 
         {/* Ads */}
-        <Box width={400} p={1} >
-          <Paper sx={paper_style} >
+        <Box width={150} p={1} display="flex" justifyContent="right">
+          <Paper sx={paper_style} pb={20}>
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={2}>
               <Typography variant="h6" fontWeight={500} mb={1.5} color="initial">Advertisements</Typography>
-              <Link href="https://www.toyota.lk/" target="_blank"> <Box component="img" src={ad01} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="https://www.milo.lk/homepage" target="_blank"> <Box component="img" src={ad02} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="https://www.pepsi.com/" target="_blank"> <Box component="img" src={ad03} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="https://www.glowandlovelycareers.lk/en/" target="_blank"> <Box component="img" src={ad04} width={300} borderRadius={3} mb={3} /> </Link>
-              <Link href="https://www.cargillsceylon.com/businesses/magic" target="_blank"> <Box component="img" src={ad05} width={300} borderRadius={3} mb={3} /> </Link>
+              <Link href="https://www.toyota.lk/" target="_blank"> <Box component="img" src={ad01} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="https://www.milo.lk/homepage" target="_blank"> <Box component="img" src={ad02} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="https://www.pepsi.com/" target="_blank"> <Box component="img" src={ad03} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="https://www.glowandlovelycareers.lk/en/" target="_blank"> <Box component="img" src={ad04} width={200} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="https://www.cargillsceylon.com/businesses/magic" target="_blank"> <Box component="img" src={ad05} width={200} borderRadius={1} mb={2} /> </Link>
             </Box>
           </Paper>
         </Box>
@@ -205,16 +205,22 @@ const btnCreatePost_style = {
   fontWeight: 700,
   px: 0,
   mx: 0,
+  "&:hover": {
+    backgroundColor: '#f0f2f5',
+
+  },
 }
 
 const paper_style = {
-  bgcolor: "#eee",
+  bgcolor: "#E4E6EB",
   position: "fixed",
+  borderRadius: 0.3,
   p: 3,
   pt: 0,
-  overflowY: "scroll",
-  maxHeight: "85vh",
-  width: 400,
+  pb: 4,
+  // overflowY: "scroll",
+  maxHeight: "86.8vh",
+  width: 300,
   '&::-webkit-scrollbar': {
     width: 0,
   },
@@ -222,6 +228,7 @@ const paper_style = {
 
 const paperStyle = {
   bgcolor: "background.mainbg",
+  border: "1px solid #CED0D3",
   borderRadius: 0.3,
   mt: 0.5,
   "li": {

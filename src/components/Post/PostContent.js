@@ -42,7 +42,7 @@ const PostContent = ({ date, life, tableValues }) => {
                     {date}
                 </Typography>
             </Box>
-            {tableValues.map(({ name, value }, i) => <Table key={i} name={name} value={value} fcwidth={120} fontSize={16} />)}
+            {tableValues.map(({ name, value }, i) => <Table key={i} name={name} value={value} fcwidth={120} fontSize={16}/>)}
         </>
     );
 };

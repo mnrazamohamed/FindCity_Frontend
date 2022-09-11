@@ -19,12 +19,13 @@ const box_style = {
     flexDirection: "column",
     width: 600,
     mx: "auto",
-    bgcolor: "#eeeeee",
-    border: "1px solid #b4b4b4",
-    borderRadius: 3,
+    bgcolor: "white",
+    border: "1px solid #CED0D3",
+    borderRadius: 1.5,
     mt: 2,
     px: 2,
     pt: 1,
-    pb: 1.5
-
+    pb: 2.5,
+    boxShadow: 2
+  
 }

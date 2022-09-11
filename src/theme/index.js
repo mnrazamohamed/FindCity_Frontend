@@ -121,7 +121,7 @@ const theme = {
         },
         "divider": "rgba(0, 0, 0, 0.12)",
         "background": {
-            default: '#f8f8f8',
+            default: '#f0f2f5',
             paper: '#ecebeb',
             mainbg: '#424242',
             // secondarybg: '#646464',

@@ -46,7 +46,8 @@ const Login = () => {
 
 const style_link = {
     "&:hover": {
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#f0f2f5',
+        textDecoration: "underline",
     },
 }
 

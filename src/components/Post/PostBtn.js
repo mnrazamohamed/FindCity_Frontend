@@ -93,16 +93,16 @@ const PostBtn = ({ postID, request, date, data }) => {
             )}
 
             {auth.role === "manager" && (
-                <Stack display="flex" justifyContent="flex-end" flexDirection="row" my={1}>
+                <Stack display="flex" justifyContent="flex-end" flexDirection="row" my={-1}>
                     <Tooltip PopperProps={PopperProps} title="Notify">
-                        <IconButton onClick={handleNotify} ><NotificationsActiveIcon /></IconButton>
+                        <IconButton sx={{color:"#3b5998"}} onClick={handleNotify} ><NotificationsActiveIcon  /></IconButton>
                     </Tooltip>
                 </Stack>
             )}
 
             {auth.role === "admin" && (
-                <Stack display="flex" justifyContent="flex-end" flexDirection="row" my={1}>
-                    <Tooltip PopperProps={PopperProps} title="Delete"><IconButton onClick={handleDelete}><DeleteIcon /></IconButton>
+                <Stack display="flex" justifyContent="flex-end" flexDirection="row" my={-1}>
+                    <Tooltip PopperProps={PopperProps} title="Delete"><IconButton sx={{color:"#d50000"}} onClick={handleDelete}><DeleteIcon /></IconButton>
                     </Tooltip>
                 </Stack>
             )}
