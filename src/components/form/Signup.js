@@ -51,7 +51,7 @@ const renderSelect = {
     value: "role",
     items: [
         { name: "Manager", value: "manager" },
-        { name: "Renter", value: "hosteler" },
+        { name: "Hosteler", value: "hosteler" },
     ]
 }
 
