@@ -110,7 +110,7 @@ const Post = () => {
       <Box display="flex" justifyContent="space-evenly" width="100%" mt={3} >
 
         {/* Services */}
-        <Box width={150} p={1} >
+        <Box width={100} p={1} >
           <Paper sx={paper_style} >
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={2}>
               <Typography variant="h6" fontWeight={500} mb={1.5} color="initial">Services</Typography>
@@ -142,7 +142,7 @@ const Post = () => {
         )}
 
         {(post instanceof Array) && (
-          <Box >
+          <Box>
             <Box display="flex" justifyContent="space-between">
               {cities && (
                 <Autocomplete
@@ -177,7 +177,7 @@ const Post = () => {
         )}
 
         {/* Ads */}
-        <Box width={150} p={1} display="flex" justifyContent="right">
+        <Box width={100} p={1} display="flex" justifyContent="right">
           <Paper sx={paper_style} pb={20}>
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={2}>
               <Typography variant="h6" fontWeight={500} mb={1.5} color="initial">Advertisements</Typography>
@@ -220,7 +220,7 @@ const paper_style = {
   pb: 4,
   // overflowY: "scroll",
   maxHeight: "86.8vh",
-  width: 300,
+  width: 280,
   '&::-webkit-scrollbar': {
     width: 0,
   },
