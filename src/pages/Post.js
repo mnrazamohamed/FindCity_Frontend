@@ -114,9 +114,9 @@ const Post = () => {
           <Paper sx={paper_style} >
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={2}>
               <Typography variant="h6" fontWeight={500} mb={1.5} color="initial">Services</Typography>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc01} width={200} borderRadius={1} mb={1.3} /> </Link>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc02} width={200} borderRadius={1} mb={1.3} /> </Link>
-              <Link href="#" target="_blank"> <Box component="img" src={srvc03} width={200} borderRadius={1} mb={0.2} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc01} width={200} height={120} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc02} width={200} height={120} borderRadius={1} mb={1.3} /> </Link>
+              <Link href="#" target="_blank"> <Box component="img" src={srvc03} width={200} height={120} borderRadius={1} mb={0.2} /> </Link>
             </Box>
           </Paper>
         </Box>
